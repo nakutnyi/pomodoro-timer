@@ -1,43 +1,45 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
-# Pomodoro.py
-# Created by Guido Minieri
-# Date - June 2017
-# My personal take on the most popular productivity tool out there.
+"""
+Pomodoro.py
+Created by Guido Minieri
+Date - June 2017
+My personal take on the most popular productivity tool out there.
+"""
 
 
-# Import libraries
 import tkinter as tk
-from tkinter import messagebox
 
 
-# FUNCTIONS
-
-# Countdown
 def count(timer):
-    global is_break
+    """
+    Countdown
+    """
+    global IS_BREAK
     global job
     global SESS_COUNTER
 
+    ask = tkinter.messagebox.askquestion
+
     if timer <= -1:
 
-        # toggle is break
-        is_break = not is_break
+        # toggle IS_BREAK
+        IS_BREAK = not IS_BREAK
 
         # prompt and start new session
-        if is_break and SESS_COUNTER % 4 != 0:
-            prompt_answer = messagebox.askquestion("Session Ended!", "Are you ready for a break?", icon='question')
-        elif is_break and SESS_COUNTER % 4 == 0:
-            prompt_answer = messagebox.askquestion("4 POMODORI!", "Do you think you deserve a very long break", icon='question')
+        if IS_BREAK and SESS_COUNTER % 4 != 0:
+            prompt_answer = ask("Session Ended!", "Are you ready for a break?", icon='question')
+        elif IS_BREAK and SESS_COUNTER % 4 == 0:
+            prompt_answer = ask("4 POMODORI!", "Do you want a long break", icon='question')
         else:
-            prompt_answer = messagebox.askquestion("Time's up!", "Ready for a new session?", icon='question')
+            prompt_answer = ask("Time's up!", "Ready for a new session?", icon='question')
 
 
 
-        if prompt_answer == 'yes' and SESS_COUNTER % 4 != 0 and is_break:
+        if prompt_answer == 'yes' and SESS_COUNTER % 4 != 0 and IS_BREAK:
             root.after_cancel(job)
             count(SHORT_BREAK)
-        elif prompt_answer == 'yes' and SESS_COUNTER % 4 == 0 and is_break:
+        elif prompt_answer == 'yes' and SESS_COUNTER % 4 == 0 and IS_BREAK:
             root.after_cancel(job)
             count(LONG_BREAK)
         elif prompt_answer == 'no':
@@ -49,22 +51,24 @@ def count(timer):
 
     m, s = divmod(timer, 60)
     time_label.configure(text='{:02d}:{:02d}'.format(m, s))
-    if is_break:
+    if IS_BREAK:
         cnt_label.configure(text='BREAK!')
     else:
         cnt_label.configure(text='Streak: {}'.format(SESS_COUNTER))
     job = root.after(1000, count, timer - 1)
 
 
-# stops the countdown and resets the counter
 def stop_count():
+    """
+    Stops the countdown and resets the counter
+    """
     global SESS_COUNTER
-    global is_break
+    global IS_BREAK
 
     root.after_cancel(job)
     time_label.configure(text='{:02d}:{:02d}'.format(0, 0))
     SESS_COUNTER = 0
-    is_break = False
+    IS_BREAK = False
     cnt_label.configure(text='Streak: {}'.format(0))
     start_btn.configure(text="Start", command=lambda: start())
 
@@ -102,7 +106,7 @@ SESSION = 25# * 60  # lenght of a pomodoro session
 SESS_COUNTER = 0
 
 # tells the program if the next session is going to be a break or not
-is_break = False
+IS_BREAK = False
 
 
 # TKINTER SETTINGS
