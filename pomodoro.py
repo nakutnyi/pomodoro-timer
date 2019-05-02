@@ -12,9 +12,7 @@ import tkinter as tk
 from tkinter import messagebox
 
 def count(timer):
-    """
-    Countdown
-    """
+    """Countdown"""
     global IS_BREAK
     global JOB
     global SESS_COUNTER
@@ -59,9 +57,7 @@ def count(timer):
 
 
 def stop_count():
-    """
-    Stops the countdown and resets the counter
-    """
+    """Stop the countdown and resets the counter"""
     global SESS_COUNTER
     global IS_BREAK
 
@@ -70,26 +66,22 @@ def stop_count():
     SESS_COUNTER = 0
     IS_BREAK = False
     CNT_LABEL.configure(text='Streak: {}'.format(0))
-    START_BTN.configure(text="Start", command=lambda: start())
+    START_BTN.configure(text="Start", command=start())
 
 
 # pauses the counter
 def pause_count():
-    global TIME_LABEL
-
+    """Pause the counter"""
     START_BTN.configure(text="Cont.", command=continue_count)
     ROOT.wait_window(TIME_LABEL)
 
 
-# continue after pause
 def continue_count():
-    global wait
-
+    """Continue after pause"""
     wait.destroy()
 
-# starts counting loop
 def start():
-    global SESSION
+    """Start counting loop"""
     global SESS_COUNTER
 
     SESS_COUNTER += 1
