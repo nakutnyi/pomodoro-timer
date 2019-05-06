@@ -90,9 +90,9 @@ def start():
 
 # VARIABLE DECLARATIONS
 # define sessions and breaks
-SHORT_BREAK = 5# * 60  # 5 mins after every pomodoro
-LONG_BREAK = 20# * 60  # 20 mins after 4 pomodori
-SESSION = 25# * 60  # lenght of a pomodoro session
+SHORT_BREAK = 5 * 60  # 5 mins after every pomodoro
+LONG_BREAK = 20 * 60  # 20 mins after 4 pomodori
+SESSION = 25 * 60  # lenght of a pomodoro session
 
 # session counter
 SESS_COUNTER = 0
