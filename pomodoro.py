@@ -11,6 +11,8 @@ My personal take on the most popular productivity tool out there.
 import tkinter as tk
 from tkinter import messagebox
 
+
+
 def count(timer):
     """Countdown"""
     global IS_BREAK
@@ -51,9 +53,13 @@ def count(timer):
     TIME_LABEL.configure(text='{:02d}:{:02d}'.format(minutes, seconds))
     if IS_BREAK:
         CNT_LABEL.configure(text='BREAK!')
+    elif IS_WAIT:
+        CNT_LABEL.configure(text='Waiting...')
     else:
         CNT_LABEL.configure(text='Streak: {}'.format(SESS_COUNTER))
-    JOB = ROOT.after(1000, count, timer - 1)
+    if not IS_WAIT:
+        JOB = ROOT.after(1000, count, timer - 1)
+        print(IS_WAIT)
 
 
 def stop_count():
@@ -72,13 +78,17 @@ def stop_count():
 # pauses the counter
 def pause_count():
     """Pause the counter"""
-    START_BTN.configure(text="Cont.", command=continue_count)
-    ROOT.wait_window(TIME_LABEL)
+    global IS_WAIT
+    IS_WAIT = not IS_WAIT
+    START_BTN.configure(text="Resume", command=continue_count)
 
 
 def continue_count():
     """Continue after pause"""
-    wait.destroy()
+    global IS_WAIT
+    IS_WAIT = not IS_WAIT
+    START_BTN.configure(text="Start", command=start)
+    #wait.destroy()
 
 def start():
     """Start counting loop"""
@@ -99,6 +109,7 @@ SESS_COUNTER = 0
 
 # tells the program if the next session is going to be a break or not
 IS_BREAK = False
+IS_WAIT = False
 
 
 # TKINTER SETTINGS
