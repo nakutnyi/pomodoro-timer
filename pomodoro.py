@@ -7,8 +7,9 @@ Date - June 2017
 My personal take on the most popular productivity tool out there.
 """
 
-
+import datetime
 import tkinter as tk
+import statistics
 from tkinter import messagebox
 
 
@@ -30,6 +31,10 @@ def count():
     ask = messagebox.askquestion
 
     if TIMER <= -1:
+
+        #write statistics entry
+        if not IS_BREAK:
+            statistics.add_stat(str(datetime.datetime.now()))
 
         # toggle IS_BREAK
         IS_BREAK = not IS_BREAK
@@ -114,9 +119,9 @@ def start():
 
 # VARIABLE DECLARATIONS
 # define sessions and breaks
-SHORT_BREAK = 5 * 60  # 5 mins after every pomodoro
-LONG_BREAK = 20 * 60  # 20 mins after 4 pomodori
-SESSION = 25 * 60  # lenght of a pomodoro session
+SHORT_BREAK = 5# * 60  # 5 mins after every pomodoro
+LONG_BREAK = 20# * 60  # 20 mins after 4 pomodori
+SESSION = 25# * 60  # lenght of a pomodoro session
 
 # session counter
 SESS_COUNTER = 0
