@@ -13,15 +13,23 @@ from tkinter import messagebox
 
 
 
-def count(timer):
+# class Counter():
+#     def __init__(self):
+#         self.is_break = False
+#         self.is_wait = False
+#         self.job = 
+
+def count():
     """Countdown"""
+
+    global TIMER
     global IS_BREAK
     global JOB
     global SESS_COUNTER
 
     ask = messagebox.askquestion
 
-    if timer <= -1:
+    if TIMER <= -1:
 
         # toggle IS_BREAK
         IS_BREAK = not IS_BREAK
@@ -38,18 +46,21 @@ def count(timer):
 
         if prompt_answer == 'yes' and SESS_COUNTER % 4 != 0 and IS_BREAK:
             ROOT.after_cancel(JOB)
-            count(SHORT_BREAK)
+            TIMER = SHORT_BREAK #TODO: count(arg)
+            count()
         elif prompt_answer == 'yes' and SESS_COUNTER % 4 == 0 and IS_BREAK:
             ROOT.after_cancel(JOB)
-            count(LONG_BREAK)
+            TIMER = LONG_BREAK #TODO: count(arg)
+            count()
         elif prompt_answer == 'no':
-            stop_count()
+            stop()
         else:
             SESS_COUNTER += 1
-            count(SESSION)
+            TIMER = SESSION #TODO: fix all global declarations
+            count()
         return
 
-    minutes, seconds = divmod(timer, 60)
+    minutes, seconds = divmod(TIMER, 60)
     TIME_LABEL.configure(text='{:02d}:{:02d}'.format(minutes, seconds))
     if IS_BREAK:
         CNT_LABEL.configure(text='BREAK!')
@@ -58,11 +69,11 @@ def count(timer):
     else:
         CNT_LABEL.configure(text='Streak: {}'.format(SESS_COUNTER))
     if not IS_WAIT:
-        JOB = ROOT.after(1000, count, timer - 1)
-        print(IS_WAIT)
+        TIMER -= 1 #TODO: count(arg)
+        JOB = ROOT.after(1000, count)
 
 
-def stop_count():
+def stop():
     """Stop the countdown and resets the counter"""
     global SESS_COUNTER
     global IS_BREAK
@@ -72,31 +83,34 @@ def stop_count():
     SESS_COUNTER = 0
     IS_BREAK = False
     CNT_LABEL.configure(text='Streak: {}'.format(0))
-    START_BTN.configure(text="Start", command=start())
+    START_BTN.configure(text="Start", command=start)
 
 
 # pauses the counter
-def pause_count():
+def pause():
     """Pause the counter"""
     global IS_WAIT
     IS_WAIT = not IS_WAIT
-    START_BTN.configure(text="Resume", command=continue_count)
+    START_BTN.configure(text="Resume", command=resume)
 
-
-def continue_count():
+def resume():
     """Continue after pause"""
     global IS_WAIT
     IS_WAIT = not IS_WAIT
+    count()
     START_BTN.configure(text="Start", command=start)
     #wait.destroy()
 
 def start():
     """Start counting loop"""
     global SESS_COUNTER
-
+    global TIMER
+    global SESSION
     SESS_COUNTER += 1
     START_BTN.configure(command=tk.DISABLED)
-    count(SESSION)
+    #TODO: find a way to put TIMER as count()'s parameter, not a global variable
+    TIMER = SESSION 
+    count()
 
 # VARIABLE DECLARATIONS
 # define sessions and breaks
@@ -151,9 +165,9 @@ CNT_LABEL.grid(row=1, column=3, columnspan=1)
 # buttons
 START_BTN = tk.Button(MAIN_LABEL, text="Start", command=start)
 START_BTN.grid(row=2, column=1)
-PAUSE_BTN = tk.Button(MAIN_LABEL, text="Pause", command=pause_count)
+PAUSE_BTN = tk.Button(MAIN_LABEL, text="Pause", command=pause)
 PAUSE_BTN.grid(row=2, column=2)
-STOP_BTN = tk.Button(MAIN_LABEL, text="Stop", command=stop_count)
+STOP_BTN = tk.Button(MAIN_LABEL, text="Stop", command=stop)
 STOP_BTN.grid(row=2, column=3)
 
 
