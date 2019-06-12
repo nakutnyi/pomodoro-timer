@@ -136,7 +136,7 @@ IS_WAIT = False
 # ROOT & title
 ROOT = tk.Tk()
 ROOT.title('Pomodoro')
-ROOT.geometry('200x60')
+ROOT.geometry('400x200')
 
 
 # labels
