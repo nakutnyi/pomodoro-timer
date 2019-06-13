@@ -10,8 +10,7 @@ My personal take on the most popular productivity tool out there.
 import datetime
 import tkinter as tk
 import statistics
-from tkinter import messagebox
-
+from tkinter import messagebox#check why we need it
 
 
 # class Counter():
@@ -41,11 +40,11 @@ def count():
 
         # prompt and start new session
         if IS_BREAK and SESS_COUNTER % 4 != 0:
-            prompt_answer = ask("Session Ended!", "Are you ready for a break?", icon='question')
+            prompt_answer = ask("Session Ended!", "\nAre you ready for a break?\n", icon='question')
         elif IS_BREAK and SESS_COUNTER % 4 == 0:
             prompt_answer = ask("4 POMODORI!", "Do you want a long break", icon='question')
         else:
-            prompt_answer = ask("Time's up!", "Ready for a new session?", icon='question')
+            prompt_answer = ask("Time's up!", "\nReady for a new session?\n", icon='question')
 
 
 
@@ -68,7 +67,7 @@ def count():
     minutes, seconds = divmod(TIMER, 60)
     TIME_LABEL.configure(text='{:02d}:{:02d}'.format(minutes, seconds))
     if IS_BREAK:
-        CNT_LABEL.configure(text='BREAK!')
+        CNT_LABEL.configure(text='Break')
     elif IS_WAIT:
         CNT_LABEL.configure(text='Waiting...')
     else:
@@ -119,9 +118,9 @@ def start():
 
 # VARIABLE DECLARATIONS
 # define sessions and breaks
-SHORT_BREAK = 5 * 60  # 5 mins after every pomodoro
-LONG_BREAK = 20 * 60  # 20 mins after 4 pomodori
-SESSION = 25 * 60  # lenght of a pomodoro session
+SHORT_BREAK = 5# * 60  # 5 mins after every pomodoro
+LONG_BREAK = 20# * 60  # 20 mins after 4 pomodori
+SESSION = 25# * 60  # lenght of a pomodoro session
 
 # session counter
 SESS_COUNTER = 0
@@ -135,8 +134,10 @@ IS_WAIT = False
 
 # ROOT & title
 ROOT = tk.Tk()
+ROOT.option_add("*Font", "courier")
+ROOT.option_add("*Label.Font", "helvetica 12 bold")
 ROOT.title('Pomodoro')
-ROOT.geometry('400x200')
+ROOT.geometry('600x250')
 
 
 # labels
@@ -168,11 +169,11 @@ CNT_LABEL.grid(row=1, column=3, columnspan=1)
 
 
 # buttons
-START_BTN = tk.Button(MAIN_LABEL, text="Start", command=start)
+START_BTN = tk.Button(MAIN_LABEL, text=" Start ", command=start)
 START_BTN.grid(row=2, column=1)
-PAUSE_BTN = tk.Button(MAIN_LABEL, text="Pause", command=pause)
+PAUSE_BTN = tk.Button(MAIN_LABEL, text=" Pause ", command=pause)
 PAUSE_BTN.grid(row=2, column=2)
-STOP_BTN = tk.Button(MAIN_LABEL, text="Stop", command=stop)
+STOP_BTN = tk.Button(MAIN_LABEL, text="  Stop  ", command=stop)
 STOP_BTN.grid(row=2, column=3)
 
 
