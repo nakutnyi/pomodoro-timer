@@ -149,6 +149,7 @@ MAIN_LABEL.grid(row=2, column=3, sticky='nesw')
 ROOT.grid_columnconfigure(1, weight=1)
 ROOT.grid_columnconfigure(2, weight=1)
 ROOT.grid_columnconfigure(3, weight=1)
+# TODO: the path to icon must not be hardcoded
 
 # row padding in window
 ROOT.grid_rowconfigure(1, weight=1)
