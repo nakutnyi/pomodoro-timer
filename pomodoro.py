@@ -134,7 +134,7 @@ IS_WAIT = False
 
 # ROOT & title
 ROOT = tk.Tk()
-ROOT.wm_iconbitmap('@'+'icon.xbm')
+ROOT.wm_iconbitmap('@'+'/home/roman/dev/python/pomodoro-timer/icon.xbm')#TODO: you know what to do
 ROOT.option_add("*Font", "courier")
 ROOT.option_add("*Label.Font", "helvetica 12 bold")
 ROOT.title('Pomodoro')
