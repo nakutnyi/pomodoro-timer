@@ -4,7 +4,8 @@
 Simple module to write statistics to log
 """
 
-STATFILE = "./stats"
+#TODO: fix it
+STATFILE = "/home/roman/dev/python/pomodoro-timer/stats"
 
 def add_stat(stat_stamp):
     with open(STATFILE, 'a') as statfile:
