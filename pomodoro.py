@@ -7,6 +7,7 @@ Date - June 2017
 My personal take on the most popular productivity tool out there.
 """
 
+import os
 import datetime
 import tkinter as tk
 import statistics
@@ -42,7 +43,7 @@ def count():
         if IS_BREAK and SESS_COUNTER % 4 != 0:
             prompt_answer = ask("Session Ended!", "\nAre you ready for a break?\n", icon='question')
         elif IS_BREAK and SESS_COUNTER % 4 == 0:
-            prompt_answer = ask("4 POMODORI!", "Do you want a long break", icon='question')
+            prompt_answer = ask("4 POMODORI!", "Do you want a long break?", icon='question')
         else:
             prompt_answer = ask("Time's up!", "\nReady for a new session?\n", icon='question')
 
@@ -134,7 +135,7 @@ IS_WAIT = False
 
 # ROOT & title
 ROOT = tk.Tk()
-ROOT.wm_iconbitmap('@'+'/home/roman/dev/python/pomodoro-timer/icon.xbm')#TODO: you know what to do
+ROOT.wm_iconbitmap('@'+os.path.dirname(__file__)+'/icon.xbm')
 ROOT.option_add("*Font", "courier")
 ROOT.option_add("*Label.Font", "helvetica 12 bold")
 ROOT.title('Pomodoro')
