@@ -11,7 +11,7 @@ import os
 import datetime
 import tkinter as tk
 import statistics
-from tkinter import messagebox#check why we need it
+from tkinter import messagebox
 
 
 # class Counter():
