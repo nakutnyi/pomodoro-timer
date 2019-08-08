@@ -135,6 +135,8 @@ IS_WAIT = False
 
 # ROOT & title
 ROOT = tk.Tk()
+# use appindicator to fix the icon problem:
+# https://www.linuxuprising.com/2018/12/fix-missing-indicator-icons-in-ubuntu.html
 ROOT.wm_iconbitmap('@'+os.path.dirname(os.path.realpath(__file__))+'/icon.xbm')
 ROOT.option_add("*Font", "courier")
 ROOT.option_add("*Label.Font", "helvetica 12 bold")
